@@ -16,8 +16,17 @@
   📢 Activity registration is open until <span id="registration-deadline">[deadline]</span>. Don't lose your spot!
 </div>
     <script>
-      // Set the registration deadline dynamically
-      document.getElementById('registration-deadline').textContent = 'June 30, 2024';
+      // Fetch the registration deadline from config.json
+      fetch('config.json')
+        .then(response => response.json())
+        .then(config => {
+          document.getElementById('registration-deadline').textContent = config.registrationDeadline;
+        })
+        .catch(error => {
+          // Fallback in case of error
+          document.getElementById('registration-deadline').textContent = 'TBD';
+          console.error('Failed to load registration deadline:', error);
+        });
     </script>
     <header>
       <h1>Mergington High School</h1>
